@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillCoin - Skill Exchange Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>SkillCoin</h1>
+            <p>Exchange Skills, Earn Coins</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Welcome to SkillCoin</h2>
+            <p>A platform where you can exchange skills with others and earn SkillCoins.</p>
+            <div class="action-buttons">
+                <a href="{{ url_for('register_user') }}" class="btn">Register</a>
+                <a href="{{ url_for('api_docs') }}" class="btn secondary">API Documentation</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Platform Features</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Offer Skills</h3>
+                    <p>Share your expertise with others and earn SkillCoins.</p>
+                </div>
+                <div class="feature">
+                    <h3>Request Skills</h3>
+                    <p>Find people who can help you with their skills.</p>
+                </div>
+                <div class="feature">
+                    <h3>Trust System</h3>
+                    <p>Build your reputation through successful exchanges.</p>
+                </div>
+                <div class="feature">
+                    <h3>Skill Matching</h3>
+                    <p>Get matched with users based on skills and availability.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="popular-skills">
+            <h2>Popular Skills on the Platform</h2>
+            <p>These skills are currently in high demand:</p>
+            <ul id="popular-skills-list">
+                <li>Loading...</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SkillCoin - Hackathon Project</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

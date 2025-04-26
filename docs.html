@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - SkillCoin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>SkillCoin API Documentation</h1>
+            <a href="{{ url_for('home') }}" class="btn secondary">Back to Home</a>
+        </div>
+    </header>
+
+    <main class="container docs">
+        <section class="endpoint">
+            <h2>User Registration</h2>
+            <div class="endpoint-details">
+                <p><strong>URL:</strong> /register</p>
+                <p><strong>Method:</strong> POST</p>
+                <p><strong>Description:</strong> Register a new user with skills</p>
+                <h3>Request Body:</h3>
+                <pre>
+{
+    "name": "User Name",
+    "email": "user@example.com",
+    "skills": [
+        {
+            "name": "Python Programming",
+            "is_offered": true,
+            "availability": "weekends"
+        },
+        {
+            "name": "Web Design",
+            "is_offered": false
+        }
+    ]
+}
+                </pre>
+                <h3>Response:</h3>
+                <pre>
+{
+    "message": "User registered successfully!",
+    "user_id": 1
+}
+                </pre>
+            </div>
+        </section>
+
+        <section class="endpoint">
+            <h2>Get Users</h2>
+            <div class="endpoint-details">
+                <p><strong>URL:</strong> /users</p>
+                <p><strong>Method:</strong> GET</p>
+                <p><strong>Description:</strong> Get all registered users</p>
+                <h3>Response:</h3>
+                <pre>
+[
+    {
+        "id": 1,
+        "name": "Alice",
+        "email": "alice@example.com",
+        "trust_score": 5.0,
+        "skillcoins_balance": 10.0,
+        "skills": [
+            {
+                "skill_name": "Python Programming",
+                "is_offered": true,
+                "availability": "anytime"
+            },
+            {
+                "skill_name": "Web Design",
+                "is_offered": false
+            }
+        ]
+    }
+]
+                </pre>
+            </div>
+        </section>
+
+        <section class="endpoint">
+            <h2>Match Skills</h2>
+            <div class="endpoint-details">
+                <p><strong>URL:</strong> /match_skills?skill_name=Python</p>
+                <p><strong>Method:</strong> GET</p>
+                <p><strong>Description:</strong> Match users offering a specific skill</p>
+                <h3>Response:</h3>
+                <pre>
+{
+    "requested_skill": "Python",
+    "matches": [
+        {
+            "user_id": 1,
+            "name": "Alice",
+            "trust_score": 5.0,
+            "availability": "anytime"
+        }
+    ]
+}
+                </pre>
+            </div>
+        </section>
+
+        <section class="endpoint">
+            <h2>Create Transaction</h2>
+            <div class="endpoint-details">
+                <p><strong>URL:</strong> /create_transaction</p>
+                <p><strong>Method:</strong> POST</p>
+                <p><strong>Description:</strong> Create a new skill transaction</p>
+                <h3>Request Body:</h3>
+                <pre>
+{
+    "offerer_id": 1,
+    "requester_id": 2,
+    "skill_id": 1,
+    "amount_paid": 5.0
+}
+                </pre>
+                <h3>Response:</h3>
+                <pre>
+{
+    "message": "Transaction successful",
+    "transaction_id": 1
+}
+                </pre>
+            </div>
+        </section>
+
+        <!-- More endpoints documentation would go here -->
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SkillCoin - Hackathon Project</p>
+        </div>
+    </footer>
+</body>
+</html>

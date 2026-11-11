@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* semantic colours, swapped for dark mode below */
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-coin: var(--coin);
+  --color-coin-deep: var(--coin-deep);
+  --color-coin-soft: var(--coin-soft);
+  --color-verdigris: var(--verdigris);
+  --color-verdigris-soft: var(--verdigris-soft);
+  --color-rust: var(--rust);
+  --color-rust-soft: var(--rust-soft);
+
+  --animate-rise: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-ticker: ticker 40s linear infinite;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+:root {
+  --paper: #f4f1ea;
+  --paper-2: #ebe6da;
+  --card: #fbf9f4;
+  --ink: #16140f;
+  --ink-2: #3a362d;
+  --muted: #77705f;
+  --line: #ddd6c6;
+  --coin: #e8a33d;
+  --coin-deep: #b9761a;
+  --coin-soft: #f6e3c0;
+  --verdigris: #2f7d6d;
+  --verdigris-soft: #d5e9e2;
+  --rust: #b4482f;
+  --rust-soft: #f3d9d1;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: #12110e;
+  --paper-2: #1b1915;
+  --card: #1f1d18;
+  --ink: #f1ece0;
+  --ink-2: #cdc6b6;
+  --muted: #8f8877;
+  --line: #34302a;
+  --coin: #f0b04f;
+  --coin-deep: #f5c37a;
+  --coin-soft: #3a2c15;
+  --verdigris: #5fb8a3;
+  --verdigris-soft: #17312b;
+  --rust: #e07a60;
+  --rust-soft: #3a1f18;
+  color-scheme: dark;
+}
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    @apply bg-paper text-ink font-sans;
+    /* faint paper grain */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection { background: var(--coin); color: #16140f; }
+  :focus-visible { outline: 2px solid var(--coin); outline-offset: 2px; border-radius: 6px; }
+}
+
+@layer components {
+  .display { font-family: var(--font-display); font-variation-settings: "opsz" 144, "SOFT" 50; letter-spacing: -0.02em; }
+  .eyebrow { @apply font-mono text-[11px] uppercase tracking-[0.18em] text-muted; }
+  .card { @apply rounded-2xl border border-line bg-card; }
+  .chip { @apply inline-flex items-center gap-1 rounded-full border border-line px-2.5 py-0.5 text-xs text-ink-2; }
+  .input {
+    @apply w-full rounded-xl border border-line bg-card px-3.5 py-2.5 text-sm text-ink placeholder:text-muted
+           outline-none transition focus:border-coin focus:ring-4 focus:ring-coin/20;
+  }
+  .label { @apply mb-1.5 block text-xs font-medium text-ink-2; }
+
+  /* perforated receipt edge */
+  .perforated {
+    --hole: 7px;
+    -webkit-mask: radial-gradient(circle var(--hole) at top, #0000 98%, #000) top / 22px 51% repeat-x,
+      radial-gradient(circle var(--hole) at bottom, #0000 98%, #000) bottom / 22px 51% repeat-x;
+    mask: radial-gradient(circle var(--hole) at top, #0000 98%, #000) top / 22px 51% repeat-x,
+      radial-gradient(circle var(--hole) at bottom, #0000 98%, #000) bottom / 22px 51% repeat-x;
+  }
+  .ruled {
+    background-image: repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px);
+  }
+}

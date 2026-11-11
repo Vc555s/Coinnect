@@ -9,5 +9,5 @@ const API = process.env.COINNECT_API ?? "http://127.0.0.1:8000";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: { alias: { "@": path.resolve(import.meta.dirname, "src") } },
-  server: { port: Number(process.env.PORT ?? 5173), proxy: Object.fromEntries(["/api", "/docs", "/openapi.json"].map((p) => [p, { target: API, changeOrigin: true }])) },
+  server: { port: Number(process.env.PORT ?? 5173), strictPort: true, proxy: Object.fromEntries(["/api", "/docs", "/openapi.json"].map((p) => [p, { target: API, changeOrigin: true }])) },
 });
